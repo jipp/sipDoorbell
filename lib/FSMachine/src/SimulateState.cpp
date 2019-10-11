@@ -1,5 +1,4 @@
 #include "SimulateState.hpp"
-#include <iostream>
 
 SimulateState::SimulateState()
 {
@@ -9,22 +8,21 @@ SimulateState::~SimulateState()
 {
 }
 
-void SimulateState::entryAction(void)
+void SimulateState::entryAction(Event event)
 {
-    std::cout << "SimulateState::entryAction" << std::endl;
 }
 
-void SimulateState::exitAction(void)
+void SimulateState::exitAction(Event event)
 {
-    std::cout << "SimulateState::exitAction" << std::endl;
 }
 
-bool SimulateState::guardAction(void)
+bool SimulateState::guardAction(Event event)
 {
-    std::cout << "SimulateState::guardAction" << std::endl;
+    if (event == Event::TRIGGER_SIMULATE_SINGLE_FAILED)
+        return false;
     return true;
 }
 
-void SimulateState::timeAction(void)
+void SimulateState::timeAction(Event event)
 {
 }

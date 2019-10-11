@@ -1,8 +1,16 @@
 #include <unity.h>
 
+void dummy(void)
+{
+    // TEST_IGNORE();
+    TEST_IGNORE_MESSAGE("on purpose");
+}
+
 void process()
 {
     UNITY_BEGIN(); // IMPORTANT LINE!
+
+    RUN_TEST(dummy);
 
     UNITY_END(); // stop unit testing
 }

@@ -1,13 +1,15 @@
 #ifndef STATE_HPP_
 #define STATE_HPP_
 
+#include "Event.hpp"
+
 class State
 {
 public:
-  virtual void entryAction(void) = 0;
-  virtual void exitAction(void) = 0;
-  virtual bool guardAction(void) = 0;
-  virtual void timeAction(void) = 0;
+  virtual void entryAction(Event) = 0;
+  virtual void exitAction(Event) = 0;
+  virtual bool guardAction(Event) = 0;
+  virtual void timeAction(Event) = 0;
 };
 
 #endif

@@ -20,6 +20,11 @@ void tearDown(void)
     // clean stuff up here
 }
 
+void dummy(void)
+{
+    TEST_IGNORE_MESSAGE("on purpose");
+}
+
 void hw_led(void)
 {
     for (int i = 0; i < 2; i++)
@@ -50,6 +55,7 @@ void setup()
 
     UNITY_BEGIN(); // IMPORTANT LINE!
 
+    RUN_TEST(dummy);
     RUN_TEST(hw_led);
     RUN_TEST(hw_button);
     RUN_TEST(wifi);

@@ -19,13 +19,13 @@ Event FSMachine::loop(Event event)
         {
             if (event == fsMatrix[i].checkEvent)
             {
-                if (fsMatrix[i].nextState->guardAction())
+                if (fsMatrix[i].nextState->guardAction(event))
                 {
                     timeoutTimerStart = now;
                     resendTimerStart = now;
-                    currentState->exitAction();
+                    currentState->exitAction(event);
                     currentState = fsMatrix[i].nextState;
-                    currentState->entryAction();
+                    currentState->entryAction(event);
 
                     return fsMatrix[i].exitEvent;
                 }
@@ -33,5 +33,23 @@ Event FSMachine::loop(Event event)
         }
     }
 
-    return event;
+    for (int i = 0; i < sizeof(fsMatrixTimer) / sizeof(FSMatrixTimer); i++)
+    {
+        if (currentState == fsMatrixTimer[i].currentState)
+        {
+            if (timeoutTimer + timeoutTimerStart < now)
+            {
+                currentState->exitAction(event);
+                return Event::IDLE;
+            }
+            if (resendTimer + resendTimerStart < now)
+            {
+                resendTimerStart = now;
+                currentState->timeAction(event);
+                return Event::SEND;
+            }
+        }
+    }
+
+    return Event::IDLE;
 }

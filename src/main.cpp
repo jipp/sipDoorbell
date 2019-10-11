@@ -36,6 +36,11 @@ void showStatus(void)
   std::cout << ">> " << millis() << "ms FreeHeap: " << ESP.getFreeHeap() << "b FreePsram: " << ESP.getFreePsram() << "b" << std::endl;
 }
 
+void triggerCall(void)
+{
+  event = Event::TRIGGER_SIMULATE_SINGLE;
+}
+
 void reset(void)
 {
   ESP.restart();
@@ -100,6 +105,7 @@ void setup()
 
   memory.attach_ms(pulse, showStatus);
   blinker.attach(blink_nok, blink);
+  button.attachClick(triggerCall);
 
   setupWiFi();
 
@@ -108,14 +114,13 @@ void setup()
 
 void loop()
 {
+  button.tick();
+
   event = fsMachine.loop(event);
+
+  if (event == Event::SEND)
+    networkClient.send();
 
   if (networkClient.listen())
     event = Event::RECEIVED;
-
-  if (event == Event::SEND)
-  {
-    networkClient.send();
-    event = Event::SENT;
-  }
 }

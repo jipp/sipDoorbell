@@ -9,10 +9,10 @@ public:
   SimulateState();
   ~SimulateState();
 
-  void entryAction(void) override;
-  void exitAction(void) override;
-  bool guardAction(void) override;
-  void timeAction(void) override;
+  void entryAction(Event) override;
+  void exitAction(Event) override;
+  bool guardAction(Event) override;
+  void timeAction(Event) override;
 };
 
 #endif
