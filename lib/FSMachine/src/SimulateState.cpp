@@ -18,8 +18,10 @@ void SimulateState::exitAction(Event event)
 
 bool SimulateState::guardAction(Event event)
 {
+#ifdef UNIT_TEST
     if (event == Event::TRIGGER_SIMULATE_SINGLE_FAILED)
         return false;
+#endif
     return true;
 }
 

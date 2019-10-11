@@ -36,6 +36,7 @@ private:
     std::chrono::milliseconds resendTimerStart;
     State *currentState;
     IdleState idle;
+#ifdef UNIT_TEST
     SimulateState simulate_single;
     SimulateState simulate_double_without_authentication;
     SimulateState simulate_double_with_authentication;
@@ -68,6 +69,10 @@ private:
         {&simulate_single_twice_receive_one},
         {&simulate_single_twice_receive_two},
     };
+#else
+    FSMatrix fsMatrix[0] = {};
+    FSMatrixTimer fsMatrixTimer[0] = {};
+#endif
 };
 
 #endif

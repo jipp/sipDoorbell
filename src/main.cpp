@@ -38,7 +38,7 @@ void showStatus(void)
 
 void triggerCall(void)
 {
-  event = Event::TRIGGER_SIMULATE_SINGLE;
+  event = Event::IDLE;
 }
 
 void reset(void)
