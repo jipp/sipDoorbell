@@ -7,6 +7,7 @@
 #include "OneButton.h"
 #include "ACS712.h"
 
+#include "Packet.hpp"
 #include "NetworkClient.hpp"
 #include "Event.hpp"
 #include "FSMachine.hpp"
@@ -18,7 +19,8 @@ Ticker blinker;
 Ticker memory;
 ACS712 sensor(ACS712_05B, SENSOR);
 
-NetworkClient networkClient = NetworkClient();
+Packet packet;
+NetworkClient networkClient = NetworkClient(server);
 Event event = Event::IDLE;
 FSMachine fsMachine = FSMachine();
 
@@ -80,7 +82,7 @@ void setupWiFi(void)
     reset();
   }
 
-  networkClient.begin();
+  networkClient.begin(&packet);
 }
 
 void setup()
@@ -119,8 +121,8 @@ void loop()
   event = fsMachine.loop(event);
 
   if (event == Event::SEND)
-    networkClient.send();
+    networkClient.send(&packet);
 
-  if (networkClient.listen())
+  if (networkClient.listen(&packet))
     event = Event::RECEIVED;
 }

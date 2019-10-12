@@ -5,5 +5,6 @@
 #define SENSOR A0
 
 const char *hostname = "sipDoorbell";
+const char *server = "lemonpi";
 
 #endif

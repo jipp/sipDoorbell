@@ -5,34 +5,24 @@
 
 #include <WiFi.h>
 #include <WiFiUdp.h>
-
-struct Socket
-{
-  std::string address;
-  uint16_t port;
-};
-
-struct Packet
-{
-  Socket local;
-  Socket remote;
-  std::string payload;
-};
+#include "Packet.hpp"
 
 class NetworkClient
 {
 public:
   NetworkClient(void);
+  explicit NetworkClient(std::string const &);
+  NetworkClient(std::string const &, uint16_t);
   ~NetworkClient(void);
 
-  bool begin(void);
-  bool listen(void);
-  bool send(void);
-
-  Packet packet;
+  bool begin(Packet *);
+  bool listen(Packet *);
+  bool send(Packet *);
 
 private:
   WiFiUDP udp;
+  std::string server;
+  uint16_t port;
 };
 
 #endif

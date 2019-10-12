@@ -1,7 +1,6 @@
 #include "gtest/gtest.h"
 
 #include <string>
-#include <iostream>
 #include <thread>
 
 #include "Event.hpp"
@@ -172,7 +171,7 @@ TEST(Handshake, single_timeout)
 
 TEST(Handshake, single_unordered)
 {
-    Event event = Event::IDLE;
+    Event event;
     FSMachine fsMachine = FSMachine();
 
     event = Event::SEND;

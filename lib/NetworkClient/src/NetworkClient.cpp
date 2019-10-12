@@ -1,41 +1,59 @@
 #include "NetworkClient.hpp"
+#include <iostream>
 
-NetworkClient::NetworkClient(void)
+NetworkClient::NetworkClient()
 {
-    this->packet.local.address = "127.0.0.1";
-    this->packet.local.port = 5060;
+    this->server = "fritz.box";
+    this->port = 5060;
+}
+
+NetworkClient::NetworkClient(std::string const &server)
+{
+    this->server = server;
+    this->port = 5060;
+}
+
+NetworkClient::NetworkClient(std::string const &server, uint16_t port)
+{
+    this->server = server;
+    this->port = port;
 }
 
 NetworkClient::~NetworkClient(void)
 {
 }
 
-bool NetworkClient::begin(void)
+bool NetworkClient::begin(Packet *packet)
 {
-    if (udp.begin(this->packet.local.port) != 1)
+    if (udp.begin(this->port) != 1)
         return false;
 
-    this->packet.local.address = std::string(WiFi.localIP().toString().c_str());
+    packet->local.address = std::string(WiFi.localIP().toString().c_str());
+    packet->local.port = this->port;
+    packet->remote.address = this->server;
+    packet->remote.port = this->port;
 
     return true;
 }
 
-bool NetworkClient::listen(void)
+bool NetworkClient::listen(Packet *packet)
 {
-    int packetSize = udp.parsePacket();
+    int payloadSize = udp.parsePacket();
 
-    if (packetSize)
+    if (payloadSize)
     {
-        char *packet = (char *)malloc(packetSize + 1);
-        
-        udp.read(packet, packetSize);
-        packet[packetSize] = '\0';
+        char *payload = (char *)malloc(payloadSize + 1);
 
-        this->packet.remote.address = std::string(udp.remoteIP().toString().c_str());
-        this->packet.remote.port = udp.remotePort();
-        this->packet.payload = packet;
+        udp.read(payload, payloadSize);
+        payload[payloadSize] = '\0';
 
-        free(packet);
+        // if (packet->remote.address != std::string(udp.remoteIP().toString().c_str()))
+        //     if (packet->remote.port != udp.remotePort())
+        //         return false;
+
+        packet->payload = payload;
+
+        free(payload);
 
         return true;
     }
@@ -43,12 +61,12 @@ bool NetworkClient::listen(void)
     return false;
 }
 
-bool NetworkClient::send(void)
+bool NetworkClient::send(Packet *packet)
 {
-    if (udp.beginPacket(this->packet.remote.address.c_str(), this->packet.remote.port) != 1)
+    if (udp.beginPacket(packet->remote.address.c_str(), packet->remote.port) != 1)
         return false;
 
-    udp.print(this->packet.payload.c_str());
+    udp.print(packet->payload.c_str());
 
     if (udp.endPacket() != 1)
         return false;

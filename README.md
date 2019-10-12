@@ -1,7 +1,7 @@
 # doorbell
  
 ## send udp packets
-echo -n "hello" > /dev/udp/192.168.178.49/5060
+echo -n "hello" > /dev/udp/192.168.178.44/5060
 echo -n `date` > /dev/udp/192.168.178.49/5060
 date && echo -n `date` > /dev/udp/192.168.178.49/5060
 date && echo -n `date` > /dev/udp/172.20.10.3/5060
@@ -11,7 +11,8 @@ sudo tcpdump  -Al udp and host 192.168.178.49
 sudo tcpdump  -Al udp and port 5060
 
 ## cppcheck
-/Users/wkeller/Downloads/cppcheck-1.89/cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio/ -I ./lib/Data/src/ -I ./lib/NetworkClient/src/ -I ./lib/FSMachine/src/ -I ./lib/Parameter/src/ .
+/Users/wkeller/Downloads/cppcheck-1.89/cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio/ -I ./lib/FSMachine/src/ -I ./lib/NetworkClient/src/ -I ./lib/Packet/src/ .
+
 C:\Users\eedwoke\Downloads\cppcheck-1.89\cppcheck-1.89\cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio\ -I .\li\Data\src\ -I .\lib\NetworkClient\src\ -I .\lib\FSMachine\src\ -I .\lib\Parameter\src\ .
 
 ## echo server (UNIX)
