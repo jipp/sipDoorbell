@@ -22,6 +22,7 @@ ACS712 sensor(ACS712_05B, SENSOR);
 Packet packet;
 NetworkClient networkClient = NetworkClient(server);
 Event event = Event::IDLE;
+Protocol protocol = Protocol();
 FSMachine fsMachine = FSMachine();
 
 const float blink_ok = 0.5;

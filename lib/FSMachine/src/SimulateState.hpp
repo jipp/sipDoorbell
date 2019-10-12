@@ -6,13 +6,13 @@
 class SimulateState : public State
 {
 public:
-  SimulateState();
+  SimulateState(void);
   ~SimulateState();
 
-  void entryAction(Event) override;
-  void exitAction(Event) override;
-  bool guardAction(Event) override;
-  void timeAction(Event) override;
+  void entryAction(Event, Protocol *) override;
+  void exitAction(Event, Protocol *) override;
+  bool guardAction(Event, Protocol *) override;
+  void timeAction(Event, Protocol *) override;
 };
 
 #endif

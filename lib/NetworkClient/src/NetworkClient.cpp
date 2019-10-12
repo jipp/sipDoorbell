@@ -1,7 +1,7 @@
 #include "NetworkClient.hpp"
 #include <iostream>
 
-NetworkClient::NetworkClient()
+NetworkClient::NetworkClient(void)
 {
     this->server = "fritz.box";
     this->port = 5060;

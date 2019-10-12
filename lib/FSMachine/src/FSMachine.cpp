@@ -3,6 +3,7 @@
 FSMachine::FSMachine()
 {
     currentState = &idle;
+    this->protocol = Protocol();
 }
 
 FSMachine::~FSMachine()
@@ -19,13 +20,13 @@ Event FSMachine::loop(Event event)
         {
             if (event == fsMatrix[i].checkEvent)
             {
-                if (fsMatrix[i].nextState->guardAction(event))
+                if (fsMatrix[i].nextState->guardAction(event, &protocol))
                 {
                     timeoutTimerStart = now;
                     resendTimerStart = now;
-                    currentState->exitAction(event);
+                    currentState->exitAction(event, &protocol);
                     currentState = fsMatrix[i].nextState;
-                    currentState->entryAction(event);
+                    currentState->entryAction(event, &protocol);
 
                     return fsMatrix[i].exitEvent;
                 }
@@ -39,13 +40,13 @@ Event FSMachine::loop(Event event)
         {
             if (timeoutTimer + timeoutTimerStart < now)
             {
-                currentState->exitAction(event);
+                currentState->exitAction(event, &protocol);
                 return Event::IDLE;
             }
             if (resendTimer + resendTimerStart < now)
             {
                 resendTimerStart = now;
-                currentState->timeAction(event);
+                currentState->timeAction(event, &protocol);
                 return Event::SEND;
             }
         }

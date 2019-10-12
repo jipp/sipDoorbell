@@ -7,6 +7,7 @@
 #include "Event.hpp"
 #include "IdleState.hpp"
 #include "SimulateState.hpp"
+#include "Protocol.hpp"
 
 struct FSMatrix
 {
@@ -24,9 +25,10 @@ struct FSMatrixTimer
 class FSMachine
 {
 public:
-    FSMachine();
+    FSMachine(void);
     ~FSMachine();
-
+    
+    Protocol protocol;
     Event loop(Event);
 
 private:

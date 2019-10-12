@@ -8,19 +8,19 @@ IdleState::~IdleState()
 {
 }
 
-void IdleState::entryAction(Event event)
+void IdleState::entryAction(Event event, Protocol *protocol)
 {
 }
 
-void IdleState::exitAction(Event event)
+void IdleState::exitAction(Event event, Protocol *protocol)
 {
 }
 
-bool IdleState::guardAction(Event event)
+bool IdleState::guardAction(Event event, Protocol *protocol)
 {
     return true;
 }
 
-void IdleState::timeAction(Event event)
+void IdleState::timeAction(Event event, Protocol *protocol)
 {
 }

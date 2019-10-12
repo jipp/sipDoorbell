@@ -13,7 +13,7 @@ public:
   NetworkClient(void);
   explicit NetworkClient(std::string const &);
   NetworkClient(std::string const &, uint16_t);
-  ~NetworkClient(void);
+  ~NetworkClient();
 
   bool begin(Packet *);
   bool listen(Packet *);

@@ -4,6 +4,8 @@
 enum class Event
 {
     IDLE,
+    SEND,
+    RECEIVED,
 #ifdef UNIT_TEST
     TRIGGER_SIMULATE_SINGLE,
     TRIGGER_SIMULATE_DOUBLE,
@@ -11,8 +13,6 @@ enum class Event
     TRIGGER_SIMULATE_SINGLE_TWICE_RECEIVE,
     TRIGGER_SIMULATE_SINGLE_FAILED,
 #endif
-    SEND,
-    RECEIVED
 };
 
 #endif
