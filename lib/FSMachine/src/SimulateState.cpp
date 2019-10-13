@@ -8,25 +8,25 @@ SimulateState::~SimulateState()
 {
 }
 
-void SimulateState::entryAction(Event event, Protocol *protocol)
+void SimulateState::entryAction(Event exitEvent, Protocol *protocol)
 {
-    protocol->cSeq++;
-    std::cout << (int)event << " " << std::endl;
+    if (exitEvent == Event::SEND)
+        protocol->cSeq++;
 }
 
-void SimulateState::exitAction(Event event, Protocol *protocol)
+void SimulateState::exitAction(Protocol *protocol)
 {
 }
 
-bool SimulateState::guardAction(Event event, Protocol *protocol)
+bool SimulateState::guardAction(Event checkEvent, Protocol *protocol)
 {
 #ifdef UNIT_TEST
-    if (event == Event::TRIGGER_SIMULATE_SINGLE_FAILED)
+    if (checkEvent == Event::TRIGGER_SIMULATE_SINGLE_FAILED)
         return false;
 #endif
     return true;
 }
 
-void SimulateState::timeAction(Event event, Protocol *protocol)
+void SimulateState::timeAction(Protocol *protocol)
 {
 }

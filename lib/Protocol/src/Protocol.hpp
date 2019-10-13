@@ -1,7 +1,7 @@
 #ifndef PROTOCOL_HPP_
 #define PROTOCOL_HPP_
 
-#include <iostream>
+#include <cstdint>
 
 class Protocol
 {

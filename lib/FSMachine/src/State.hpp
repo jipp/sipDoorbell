@@ -8,9 +8,9 @@ class State
 {
 public:
   virtual void entryAction(Event, Protocol *) = 0;
-  virtual void exitAction(Event, Protocol *) = 0;
+  virtual void exitAction(Protocol *) = 0;
   virtual bool guardAction(Event, Protocol *) = 0;
-  virtual void timeAction(Event, Protocol *) = 0;
+  virtual void timeAction(Protocol *) = 0;
 };
 
 #endif

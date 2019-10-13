@@ -10,7 +10,7 @@ FSMachine::~FSMachine()
 {
 }
 
-Event FSMachine::loop(Event event)
+Event FSMachine::loop(Event checkEvent)
 {
     std::chrono::milliseconds now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 
@@ -18,15 +18,15 @@ Event FSMachine::loop(Event event)
     {
         if (currentState == fsMatrix[i].currentState)
         {
-            if (event == fsMatrix[i].checkEvent)
+            if (checkEvent == fsMatrix[i].checkEvent)
             {
-                if (fsMatrix[i].nextState->guardAction(event, &protocol))
+                if (fsMatrix[i].nextState->guardAction(checkEvent, &protocol))
                 {
                     timeoutTimerStart = now;
                     resendTimerStart = now;
-                    currentState->exitAction(event, &protocol);
+                    currentState->exitAction(&protocol);
                     currentState = fsMatrix[i].nextState;
-                    currentState->entryAction(event, &protocol);
+                    currentState->entryAction(fsMatrix[i].exitEvent, &protocol);
 
                     return fsMatrix[i].exitEvent;
                 }
@@ -40,13 +40,13 @@ Event FSMachine::loop(Event event)
         {
             if (timeoutTimer + timeoutTimerStart < now)
             {
-                currentState->exitAction(event, &protocol);
+                currentState->exitAction(&protocol);
                 return Event::IDLE;
             }
             if (resendTimer + resendTimerStart < now)
             {
                 resendTimerStart = now;
-                currentState->timeAction(event, &protocol);
+                currentState->timeAction(&protocol);
                 return Event::SEND;
             }
         }

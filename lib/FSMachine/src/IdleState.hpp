@@ -10,9 +10,9 @@ public:
   ~IdleState();
 
   void entryAction(Event, Protocol *) override;
-  void exitAction(Event, Protocol *) override;
+  void exitAction(Protocol *) override;
   bool guardAction(Event, Protocol *) override;
-  void timeAction(Event, Protocol *) override;
+  void timeAction(Protocol *) override;
 };
 
 #endif
