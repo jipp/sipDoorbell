@@ -3,16 +3,18 @@
 FSMachine::FSMachine()
 {
     currentState = &idle;
-    this->protocol = Protocol();
+    protocol = Protocol();
 }
 
 FSMachine::~FSMachine()
 {
 }
 
-Event FSMachine::loop(Event checkEvent)
+Event FSMachine::loop(Event checkEvent, Packet *packet)
 {
     std::chrono::milliseconds now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
+
+    protocol.packet = *packet;
 
     for (int i = 0; i < sizeof(fsMatrix) / sizeof(FSMatrix); i++)
     {

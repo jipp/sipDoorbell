@@ -119,7 +119,7 @@ void loop()
 {
   button.tick();
 
-  event = fsMachine.loop(event);
+  event = fsMachine.loop(event, &packet);
 
   if (event == Event::SEND)
     networkClient.send(&packet);

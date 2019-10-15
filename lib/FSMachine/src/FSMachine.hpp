@@ -8,6 +8,7 @@
 #include "IdleState.hpp"
 #include "SimulateState.hpp"
 #include "Protocol.hpp"
+#include "Packet.hpp"
 
 struct FSMatrix
 {
@@ -27,9 +28,9 @@ class FSMachine
 public:
     FSMachine(void);
     ~FSMachine();
-    
+
     Protocol protocol;
-    Event loop(Event);
+    Event loop(Event, Packet *);
 
 private:
     const std::chrono::milliseconds resendTimer = (std::chrono::milliseconds)300;

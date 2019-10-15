@@ -2,14 +2,14 @@
 
 NetworkClient::NetworkClient(void)
 {
-    this->server = "fritz.box";
-    this->port = 5060;
+    server = "fritz.box";
+    port = 5060;
 }
 
 NetworkClient::NetworkClient(std::string const &server)
 {
     this->server = server;
-    this->port = 5060;
+    port = 5060;
 }
 
 NetworkClient::NetworkClient(std::string const &server, uint16_t port)
@@ -24,13 +24,13 @@ NetworkClient::~NetworkClient(void)
 
 bool NetworkClient::begin(Packet *packet)
 {
-    if (udp.begin(this->port) != 1)
+    if (udp.begin(port) != 1)
         return false;
 
     packet->local.address = std::string(WiFi.localIP().toString().c_str());
-    packet->local.port = this->port;
-    packet->remote.address = this->server;
-    packet->remote.port = this->port;
+    packet->local.port = port;
+    packet->remote.address = server;
+    packet->remote.port = port;
 
     return true;
 }
