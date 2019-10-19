@@ -6,7 +6,31 @@ TEST(DISABLED_dummy, dummy)
 {
 }
 
-TEST(Parse, 401)
+TEST(DISABLED_Parse, undefined)
+{
+    Protocol protocol = Protocol();
+
+    protocol.packet.local.address = "esp32";
+    protocol.packet.local.port = 5060;
+    protocol.packet.remote.address = "fritz.box";
+    protocol.packet.remote.port = 5060;
+    protocol.packet.payload = "";
+    protocol.packet.payload = std::string("");
+    protocol.parse();
+    EXPECT_EQ((int)protocol.answer, 0);
+    EXPECT_EQ(protocol.branch, "JUw5bL3G89lQuHSX");
+    EXPECT_EQ(protocol.local.tag, "8cPXEvfwbA15sP6K");
+    EXPECT_EQ(protocol.local.addr, "<sip:doorbell@192.168.178.1>");
+    EXPECT_EQ(protocol.remote.tag, "BFE65384385541CC");
+    EXPECT_EQ(protocol.remote.addr, "<sip:doorbell@192.168.178.1>");
+    EXPECT_EQ(protocol.callID, "qfKvvLpcl6");
+    EXPECT_EQ(protocol.cSeq, 1);
+    EXPECT_EQ(protocol.flow, "REGISTER\r");
+    EXPECT_EQ(protocol.realm, "fritz.box");
+    EXPECT_EQ(protocol.nonce, "8FF3B1F255036289");
+}
+
+TEST(DParse, 401)
 {
     Protocol protocol = Protocol();
 
