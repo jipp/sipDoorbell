@@ -1,0 +1,81 @@
+----------------------------------------
+>> 7990ms before: EventType: 4 StateName: 2
+>> 7991ms after:  EventType: 1 StateName: 2
+----------------------------------------
+>> 7991ms before: EventType: 1 StateName: 2
+sent packet:
+
+REGISTER sip:fritz.box SIP/2.0
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport
+Max-Forwards: 70
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: doorbell <sip:doorbell@fritz.box>
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 REGISTER
+Contact: <sip:doorbell@192.168.178.44>
+Content-Length: 0
+
+>> 8011ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 8013ms before: EventType: 2 StateName: 2
+>> 8014ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 8015ms before: EventType: 3 StateName: 2
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: doorbell <sip:doorbell@fritz.box>;tag=784CA476C81DB753
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 REGISTER
+WWW-Authenticate: Digest realm="fritz.box", nonce="B858311D66328B2A"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 8028ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 8028ms before: EventType: 2 StateName: 2
+>> 8031ms after:  EventType: 1 StateName: 2
+----------------------------------------
+>> 8031ms before: EventType: 1 StateName: 2
+sent packet:
+
+REGISTER sip:fritz.box SIP/2.0
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport
+Max-Forwards: 70
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: doorbell <sip:doorbell@fritz.box>;tag=784CA476C81DB753
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 2 REGISTER
+Contact: <sip:doorbell@192.168.178.44>
+Authorization: Digest username="doorbell", realm="fritz.box", nonce="B858311D66328B2A", opaque="", uri="sip:fritz.box", response="cf3b21d83efea02887b749200779bc00"
+Content-Length: 0
+
+>> 8043ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 8045ms before: EventType: 2 StateName: 2
+>> 8046ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 8048ms before: EventType: 3 StateName: 2
+received packet:
+
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: doorbell <sip:doorbell@fritz.box>;tag=784CA476C81DB753
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 2 REGISTER
+Contact: <sip:doorbell@192.168.178.44>;expires=300
+User-Agent: AVM FRITZ!Box 6590 Cable 148.07.10 (May 16 2019)
+Supported: 100rel,replaces,timer
+Allow-Events: telephone-event,refer,reg
+Allow: INVITE,ACK,OPTIONS,CANCEL,BYE,UPDATE,PRACK,INFO,SUBSCRIBE,NOTIFY,REFER,MESSAGE,PUBLISH
+Accept: application/sdp, multipart/mixed
+Accept-Encoding: identity
+Content-Length: 0
+
+>> 8066ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 8066ms before: EventType: 2 StateName: 2
+>> 8066ms after:  EventType: 2 StateName: 0

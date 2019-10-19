@@ -1,0 +1,22 @@
+Register
+wrong sip address           OK
+wrong username              OK
+wrong passwword             OK
+OK (200)                    OK
+BAD_REQUEST (400)           OK
+UNAUTHORIZED (401)          OK
+NOT_FOUND (404)             NA
+INTERNAL_SERVER_ERROR (500) OK
+
+Invite
+wrong username
+wrong passwword
+wrong sip address
+busy                
+decline                 
+accept, do nothing     
+accept, hang up     
+OK (200)                
+BAD_REQUEST (400)       
+UNAUTHORIZED (401)      
+NOT_FOUND (404)             NA

@@ -1,0 +1,172 @@
+     8710 V: EventQueue: push: '1'
+     8710 T: FreeHeap: 222504
+     8711 V: EventQueue: pop: '1'
+     8713 T: InviteState::entryAction
+     8716 N: sending Packet:
+
+INVITE sip:**612@192.168.0.1 SIP/2.0
+Call-ID: 1589907502@192.168.0.32
+CSeq: 1 INVITE
+Max-Forwards: 70
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+To: <sip:**612@192.168.0.1>
+Contact: "620" <sip:620@192.168.0.32:5060;transport=udp>
+Content-Type: application/sdp
+Content-Length: 0
+
+     8766 N: received Packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Call-ID: 1589907502@192.168.0.32
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="68A887275620C135"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+
+     8789 V: EventQueue: push: '2'
+     8792 V: EventQueue: pop: '2'
+     8795 T: AckState::entryAction
+     8798 N: sending Packet:
+
+ACK sip:**612@192.168.0.1 SIP/2.0
+Call-ID: 1589907502@192.168.0.32
+CSeq: 1 ACK
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Max-Forwards: 70
+Content-Length: 0
+
+     8826 T: InviteState::entryAction
+     8830 N: sending Packet:
+
+INVITE sip:**612@192.168.0.1 SIP/2.0
+Call-ID: 1589907502@192.168.0.32
+CSeq: 2 INVITE
+Max-Forwards: 70
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Contact: "620" <sip:620@192.168.0.32:5060;transport=udp>
+Authorization: Digest username="620", realm="fritz.box", nonce="68A887275620C135", uri="sip:**612@192.168.0.1", response="1f34c1f1835dc8e9bedfeddbcd987d52"
+Content-Type: application/sdp
+Content-Length: 0
+
+     8890 N: received Packet:
+
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Call-ID: 1589907502@192.168.0.32
+CSeq: 2 INVITE
+User-Agent: AVM FRITZ!Box 6360 Cable (um) 85.06.52 TAL (Apr 26 2016)
+Content-Length: 0
+
+
+     8912 V: EventQueue: push: '2'
+     8915 V: EventQueue: pop: '2'
+     8918 T: AckState::entryAction
+     8921 N: sending Packet:
+
+ACK sip:**612@192.168.0.1 SIP/2.0
+Call-ID: 1589907502@192.168.0.32
+CSeq: 2 ACK
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Max-Forwards: 70
+Content-Length: 0
+
+     8950 N: received Packet:
+
+SIP/2.0 183 Session Progress
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Call-ID: 1589907502@192.168.0.32
+CSeq: 2 INVITE
+Contact: <sip:C1141F46F47E3ABE6C46EC390A774@192.168.0.1>
+User-Agent: AVM FRITZ!Box 6360 Cable (um) 85.06.52 TAL (Apr 26 2016)
+Content-Type: application/sdp
+Content-Length:   194
+
+v=0
+o=user 12765967 12765967 IN IP4 192.168.0.1
+s=call
+c=IN IP4 192.168.0.1
+t=0 0
+m=audio 7090 RTP/AVP 8 0 101
+a=sendrecv
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-15
+a=rtcp:7091
+
+     9007 V: EventQueue: push: '2'
+     9009 V: EventQueue: pop: '2'
+     9012 T: RingingState::entryAction
+    29017 T: ByeState::timeAction
+    29017 N: sending Packet:
+
+BYE sip:**612@192.168.0.1 SIP/2.0
+Call-ID: 1589907502@192.168.0.32
+CSeq: 2 BYE
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Max-Forwards: 70
+Content-Length: 0
+
+    29045 N: received Packet:
+
+SIP/2.0 487 Request Cancelled
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Call-ID: 1589907502@192.168.0.32
+CSeq: 2 INVITE
+User-Agent: AVM FRITZ!Box 6360 Cable (um) 85.06.52 TAL (Apr 26 2016)
+Content-Length: 0
+
+
+    29069 V: EventQueue: push: '2'
+    29072 V: EventQueue: pop: '2'
+    29075 T: AckState::entryAction
+    29078 N: sending Packet:
+
+ACK sip:**612@192.168.0.1 SIP/2.0
+Call-ID: 1589907502@192.168.0.32
+CSeq: 2 ACK
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Max-Forwards: 70
+Content-Length: 0
+
+    29106 N: received Packet:
+
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.0.32:5060;branch=378247831;rport=5060
+From: "info call" <sip:620@192.168.0.1>;tag=3808265091
+To: <sip:**612@192.168.0.1>;tag=D5D1C1961EC0DA82
+Call-ID: 1589907502@192.168.0.32
+CSeq: 2 BYE
+X-RTP-Stat: CS=0;PS=0;ES=0;OS=0;SP=0/0;SO=0;QS=-;PR=0;ER=0;OR=0;CR=0;SR=0;QR=-;PL=0,0;BL=0;LS=0;RB=0/0;SB=0/0;EN=;DE=;JI=0,0;DL=0,0,0;IP=192.168.0.1,[::]
+X-RTP-Stat-Add: DQ=0;DSS=0;DS=0;PLCS=0;JS=0
+User-Agent: AVM FRITZ!Box 6360 Cable (um) 85.06.52 TAL (Apr 26 2016)
+Supported: 100rel,replaces,timer
+Allow-Events: telephone-event,refer
+Content-Length: 0
+
+
+    29160 V: EventQueue: push: '2'
+    29163 V: EventQueue: pop: '2'
+    29166 T: IdleState::entryAction
+--------------------
+29171 Success!
+--------------------

@@ -1,0 +1,249 @@
+----------------------------------------
+>> 4847ms before: EventType: 4 StateName: 2
+>> 4849ms after:  EventType: 1 StateName: 2
+----------------------------------------
+>> 4849ms before: EventType: 1 StateName: 2
+sent packet:
+
+INVITE sip:fritz.box SIP/2.0
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport
+Max-Forwards: 70
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+Contact: <sip:doorbell@192.168.178.44>
+Content-Length: 0
+
+>> 4869ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 4871ms before: EventType: 2 StateName: 2
+>> 4872ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 4874ms before: EventType: 3 StateName: 2
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 4886ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 4887ms before: EventType: 2 StateName: 2
+>> 4889ms after:  EventType: 1 StateName: 2
+----------------------------------------
+>> 4890ms before: EventType: 1 StateName: 2
+sent packet:
+
+INVITE sip:fritz.box SIP/2.0
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport
+Max-Forwards: 70
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 2 INVITE
+Contact: <sip:doorbell@192.168.178.44>
+Authorization: Digest username="doorbell", realm="fritz.box", nonce="9FBE994A42875C0F", opaque="", uri="sip:fritz.box", response="1ae783ea846a6d5b1a3d93f05900f5fb"
+Content-Length: 0
+
+>> 4901ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 4903ms before: EventType: 2 StateName: 2
+>> 4904ms after:  EventType: 2 StateName: 2
+----------------------------------------
+>> 4906ms before: EventType: 3 StateName: 2
+received packet:
+
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 2 INVITE
+User-Agent: AVM FRITZ!Box 6590 Cable 148.07.10 (May 16 2019)
+Content-Length: 0
+
+>> 4917ms after:  EventType: 7 StateName: 2
+----------------------------------------
+>> 4918ms before: EventType: 7 StateName: 2
+>> 4918ms after:  EventType: 7 StateName: 0
+----------------------------------------
+>> 4920ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 183 Session Progress
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=1F316DD5BD0BC808
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 2 INVITE
+Contact: <sip:DA2C7B22A144A1EE2A89805CD95AF@192.168.178.1>
+User-Agent: AVM FRITZ!Box 6590 Cable 148.07.10 (May 16 2019)
+Content-Type: application/sdp
+Content-Length:   198
+
+v=0
+o=user 16426664 16426664 IN IP4 192.168.178.1
+s=call
+c=IN IP4 192.168.178.1
+t=0 0
+m=audio 7078 RTP/AVP 8 0 101
+a=sendrecv
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-15
+a=rtcp:7079
+>> 4936ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 5418ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 5426ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 6441ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 6449ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 8592ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 8600ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 12381ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 12389ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 16582ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 16590ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 20470ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 20478ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 24486ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 24495ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 28457ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 28465ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 32554ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
+
+>> 32562ms after:  EventType: 3 StateName: 0
+----------------------------------------
+>> 36444ms before: EventType: 3 StateName: 0
+received packet:
+
+SIP/2.0 401 Unauthorized
+Via: SIP/2.0/UDP 192.168.178.44:5060;branch=4g5F2uQIwb1g2BAL;rport=5060
+From: doorbell <sip:doorbell@fritz.box>;tag=QFKIxpmMv0ez2t8f
+To: "01735430716" <sip:01735430716@fritz.box>;tag=02129FFEAFBC2933
+Call-ID: 5PyBO56tKW@192.168.178.44
+CSeq: 1 INVITE
+WWW-Authenticate: Digest realm="fritz.box", nonce="9FBE994A42875C0F"
+User-Agent: FRITZ!OS
+Content-Length: 0
