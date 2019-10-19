@@ -5,6 +5,8 @@
 #define SENSOR A0
 
 const char *hostname = "sipDoorbell";
-const char *server = "lemonpi";
+const char *server = "fritz.box";
+const char *username = "doorbell";
+const char *password = "Drei3Zehn";
 
 #endif

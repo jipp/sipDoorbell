@@ -12,6 +12,10 @@ struct Socket
 class Packet
 {
 public:
+    Packet(void);
+    ~Packet();
+    Packet &operator=(const Packet &);
+
     Socket local;
     Socket remote;
     std::string payload;

@@ -7,6 +7,7 @@
 #include "Event.hpp"
 #include "IdleState.hpp"
 #include "SimulateState.hpp"
+#include "RegisterState.hpp"
 #include "Protocol.hpp"
 #include "Packet.hpp"
 
@@ -27,6 +28,7 @@ class FSMachine
 {
 public:
     FSMachine(void);
+    FSMachine(std::string, std::string);
     ~FSMachine();
 
     Protocol protocol;
@@ -73,8 +75,16 @@ private:
         {&simulate_single_twice_receive_two},
     };
 #else
-    FSMatrix fsMatrix[0] = {};
-    FSMatrixTimer fsMatrixTimer[0] = {};
+    RegisterState register_without_authentication;
+    RegisterState register_with_authentication;
+    FSMatrix fsMatrix[3] = {
+        {&idle, Event::TRIGGER_REGISTER, &register_without_authentication, Event::SEND},
+        {&register_without_authentication, Event::RECEIVED, &register_with_authentication, Event::SEND},
+        {&register_with_authentication, Event::RECEIVED, &idle, Event::IDLE},
+    };
+    FSMatrixTimer fsMatrixTimer[1] = {
+        {&register_without_authentication},
+    };
 #endif
 };
 

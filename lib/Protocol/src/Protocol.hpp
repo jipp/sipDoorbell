@@ -9,6 +9,10 @@
 #include "Packet.hpp"
 #include "StatusCode.hpp"
 
+#ifdef ESP32
+#include "MD5Builder.h"
+#endif
+
 struct values
 {
     std::string tag;
@@ -39,6 +43,7 @@ public:
     std::string nonce;
 
     void parse(void);
+    std::string calcHash(const std::string &);
 
 private:
     std::vector<std::string> lines;
@@ -46,6 +51,7 @@ private:
     void tokenizePayload(void);
     std::string getToken(std::string, int);
     std::string getValue(std::string, std::string, std::string);
+    std::string getRandomString(int);
 };
 
 #endif

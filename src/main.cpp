@@ -23,7 +23,7 @@ Packet packet;
 NetworkClient networkClient = NetworkClient(server);
 Event event = Event::IDLE;
 Protocol protocol = Protocol();
-FSMachine fsMachine = FSMachine();
+FSMachine fsMachine = FSMachine(username, password);
 
 const float blink_ok = 0.5;
 const float blink_nok = 0.1;
@@ -41,7 +41,10 @@ void showStatus(void)
 
 void triggerCall(void)
 {
-  event = Event::IDLE;
+  event = Event::TRIGGER_REGISTER;
+#ifdef VERBOSE
+  std::cout << "call triggered: " << (int)event << std::endl;
+#endif
 }
 
 void reset(void)
@@ -122,8 +125,16 @@ void loop()
   event = fsMachine.loop(event, &packet);
 
   if (event == Event::SEND)
+  {
+    std::cout << "send:" << std::endl
+              << packet.payload << std::endl;
     networkClient.send(&packet);
+  }
 
   if (networkClient.listen(&packet))
+  {
+    std::cout << "received:" << std::endl
+              << packet.payload << std::endl;
     event = Event::RECEIVED;
+  }
 }

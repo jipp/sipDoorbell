@@ -1,7 +1,5 @@
 #include "gtest/gtest.h"
 
-#include <string>
-
 #include "Protocol.hpp"
 
 TEST(DISABLED_dummy, dummy)
@@ -35,9 +33,9 @@ TEST(Parse, 401)
     EXPECT_EQ(protocol.remote.addr, "<sip:doorbell@192.168.178.1>");
     EXPECT_EQ(protocol.callID, "qfKvvLpcl6");
     EXPECT_EQ(protocol.cSeq, 1);
+    EXPECT_EQ(protocol.flow, "REGISTER\r");
     EXPECT_EQ(protocol.realm, "fritz.box");
     EXPECT_EQ(protocol.nonce, "8FF3B1F255036289");
-    EXPECT_EQ(protocol.flow, "REGISTER\r");
 }
 
 TEST(Parse, 500)
@@ -66,9 +64,9 @@ TEST(Parse, 500)
     EXPECT_EQ(protocol.remote.addr, "<sip:doorbell@192.168.178.1>");
     EXPECT_EQ(protocol.callID, "qfKvvLpcl6");
     EXPECT_EQ(protocol.cSeq, 1);
+    EXPECT_EQ(protocol.flow, "REGISTER\r");
     EXPECT_EQ(protocol.realm, "");
     EXPECT_EQ(protocol.nonce, "");
-    EXPECT_EQ(protocol.flow, "REGISTER\r");
 }
 
 int main(int argc, char **argv)
