@@ -10,8 +10,10 @@ SimulateState::~SimulateState()
 
 void SimulateState::entryAction(Event exitEvent, Protocol *protocol)
 {
+#ifdef UNIT_TEST
     if (exitEvent == Event::SEND)
-        protocol->cSeq++;
+        protocol->cSeqSimulate++;
+#endif
 }
 
 void SimulateState::exitAction(Protocol *protocol)

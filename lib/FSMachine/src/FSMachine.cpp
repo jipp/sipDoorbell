@@ -23,6 +23,7 @@ Event FSMachine::loop(Event checkEvent, Packet *packet)
     std::chrono::milliseconds now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 
     protocol.packet = *packet;
+    
     if (checkEvent == Event::RECEIVED)
         protocol.parse();
 

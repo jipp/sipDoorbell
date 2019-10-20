@@ -1,15 +1,23 @@
 #include "Protocol.hpp"
 
+#include <iostream>
+
 Protocol::Protocol(void)
 {
-    cSeq = 0;
     cSeqRegister = 0;
     cSeqInvite = 0;
     cSeqAck = 0;
-    local.tag = getRandomString(16);
-    remote.tag.clear();
+#ifdef UNIT_TEST
+    cSeqSimulate = 0;
+    branch = "1234567890abcdef";
+    callID = "234567890abcdef1";
+    local.tag = "34567890abcdef12";
+#else
     branch = getRandomString(16);
     callID = getRandomString(10);
+    local.tag = getRandomString(16);
+#endif
+    remote.tag.clear();
     answer = StatusCode::not_defined;
 }
 
@@ -19,21 +27,18 @@ Protocol::~Protocol(void)
 
 void Protocol::parse(void)
 {
-    if (!packet.payload.empty())
-    {
-        tokenizePayload();
-        answer = StatusCode(atoi(getToken("SIP/2.0", 1).c_str()));
-        branch = getValue("Via:", "branch=", ";");
-        remote.tag = getValue("To:", "tag=", "\r\n");
-        remote.addr = getValue("To:", " ", ";");
-        local.tag = getValue("From:", "tag=", "\r\n");
-        local.addr = getValue("From:", " ", ";");
-        realm = getValue("WWW-Authenticate:", "realm=\"", "\"");
-        nonce = getValue("WWW-Authenticate:", "nonce=\"", "\"");
-        callID = getValue("Call-ID:", " ", "@");
-        cSeq = atoi(getToken("CSeq:", 1).c_str());
-        flow = getToken("CSeq:", 2);
-    }
+    tokenizePayload();
+    answer = StatusCode(atoi(getToken("SIP/2.0", 1).c_str()));
+    branch = getValue("Via:", "branch=", ";");
+    remote.tag = getValue("To:", "tag=", "\r\n");
+    remote.addr = getValue("To:", " ", ";");
+    local.tag = getValue("From:", "tag=", "\r\n");
+    local.addr = getValue("From:", " ", ";");
+    realm = getValue("WWW-Authenticate:", "realm=\"", "\"");
+    nonce = getValue("WWW-Authenticate:", "nonce=\"", "\"");
+    callID = getValue("Call-ID:", " ", "@");
+    cSeq = atoi(getToken("CSeq:", 1).c_str());
+    flow = getToken("CSeq:", 2);
 }
 
 void Protocol::tokenizePayload(void)
@@ -53,6 +58,9 @@ std::string Protocol::getToken(std::string linePattern, int n)
     std::vector<std::string> token;
     std::istringstream line;
     std::string buffer;
+
+    if (lines.size() == 0)
+        return "";
 
     for (i = 0; i < lines.size(); i++)
         if (lines[i].find(linePattern) != std::string::npos)

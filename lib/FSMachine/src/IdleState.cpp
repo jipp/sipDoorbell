@@ -10,6 +10,8 @@ IdleState::~IdleState()
 
 void IdleState::entryAction(Event exitEvent, Protocol *protocol)
 {
+    protocol->answer = StatusCode::not_defined;
+    protocol->remote.tag.clear();
 }
 
 void IdleState::exitAction(Protocol *protocol)

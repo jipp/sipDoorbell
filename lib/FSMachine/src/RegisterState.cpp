@@ -1,6 +1,5 @@
 #include "RegisterState.hpp"
 
-
 RegisterState::RegisterState()
 {
 }

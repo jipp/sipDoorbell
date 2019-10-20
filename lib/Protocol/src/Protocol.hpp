@@ -27,6 +27,9 @@ public:
 
     Packet packet;
     uint16_t cSeq;
+#ifdef UNIT_TEST
+    uint16_t cSeqSimulate;
+#endif
     uint16_t cSeqRegister;
     uint16_t cSeqInvite;
     uint16_t cSeqAck;

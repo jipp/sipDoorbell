@@ -23,14 +23,14 @@ TEST(Handshake, single)
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 }
 
 TEST(Handshake, single_failed)
@@ -61,21 +61,21 @@ TEST(Handshake, double)
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 2);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 2);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 2);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 2);
 }
 
 TEST(Send, two_packets)
@@ -91,18 +91,18 @@ TEST(Send, two_packets)
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 2);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 2);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 2);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 2);
 }
 
 TEST(Receive, two_packets)
@@ -118,21 +118,21 @@ TEST(Receive, two_packets)
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 }
 
 TEST(Handshake, single_resend)
@@ -148,24 +148,24 @@ TEST(Handshake, single_resend)
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     std::this_thread::sleep_for((std::chrono::milliseconds)400);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 }
 
 TEST(Handshake, single_timeout)
@@ -181,17 +181,17 @@ TEST(Handshake, single_timeout)
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     std::this_thread::sleep_for((std::chrono::milliseconds)4000);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 }
 
 TEST(Handshake, single_unordered)
@@ -205,32 +205,32 @@ TEST(Handshake, single_unordered)
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 0);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 0);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 0);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 0);
 
     event = Event::TRIGGER_SIMULATE_SINGLE;
     EXPECT_EQ(event, Event::TRIGGER_SIMULATE_SINGLE);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::SEND);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 
     event = Event::RECEIVED;
     EXPECT_EQ(event, Event::RECEIVED);
 
     event = fsMachine.loop(event, &packet);
     EXPECT_EQ(event, Event::IDLE);
-    EXPECT_EQ(fsMachine.protocol.cSeq, 1);
+    EXPECT_EQ(fsMachine.protocol.cSeqSimulate, 1);
 }
 
 int main(int argc, char **argv)
