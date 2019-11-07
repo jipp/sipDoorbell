@@ -4,6 +4,7 @@
 
 Protocol::Protocol(void)
 {
+    cSeq = 0;
     cSeqRegister = 0;
     cSeqInvite = 0;
     cSeqAck = 0;

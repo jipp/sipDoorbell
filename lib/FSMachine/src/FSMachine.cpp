@@ -1,15 +1,13 @@
 #include "FSMachine.hpp"
 
-FSMachine::FSMachine()
+FSMachine::FSMachine() : protocol(Protocol())
 {
     currentState = &idle;
-    protocol = Protocol();
 }
 
-FSMachine::FSMachine(std::string username, std::string password)
+FSMachine::FSMachine(std::string const &username, std::string const &password) : protocol(Protocol())
 {
     currentState = &idle;
-    protocol = Protocol();
     protocol.username = username;
     protocol.password = password;
 }
@@ -23,7 +21,7 @@ Event FSMachine::loop(Event checkEvent, Packet *packet)
     std::chrono::milliseconds now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 
     protocol.packet = *packet;
-    
+
     if (checkEvent == Event::RECEIVED)
         protocol.parse();
 

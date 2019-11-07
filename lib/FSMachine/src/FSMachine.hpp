@@ -28,7 +28,7 @@ class FSMachine
 {
 public:
     FSMachine(void);
-    FSMachine(std::string, std::string);
+    FSMachine(std::string const &, std::string const &);
     ~FSMachine();
 
     Protocol protocol;
