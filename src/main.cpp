@@ -29,17 +29,17 @@ const float blink_ok = 0.5;
 const float blink_nok = 0.1;
 const uint32_t pulse = 60000;
 
-void blink(void)
+void blink()
 {
   digitalWrite(BUILTIN_LED, !digitalRead(BUILTIN_LED));
 }
 
-void showStatus(void)
+void showStatus()
 {
   std::cout << ">> " << millis() << "ms FreeHeap: " << ESP.getFreeHeap() << "b FreePsram: " << ESP.getFreePsram() << "b" << std::endl;
 }
 
-void triggerCall(void)
+void triggerCall()
 {
   event = Event::TRIGGER_REGISTER;
 #ifdef VERBOSE
@@ -47,13 +47,13 @@ void triggerCall(void)
 #endif
 }
 
-void reset(void)
+void reset()
 {
   ESP.restart();
   delay(5000);
 }
 
-void setupWiFi(void)
+void setupWiFi()
 {
   WiFiManager wifiManager;
 
