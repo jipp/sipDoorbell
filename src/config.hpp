@@ -1,5 +1,5 @@
-#ifndef config_hpp
-#define config_hpp
+#ifndef CONFIG_HPP_
+#define CONFIG_HPP_
 
 #define PUSH_BUTTON 27
 #define SENSOR A0

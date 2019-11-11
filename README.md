@@ -11,9 +11,9 @@ sudo tcpdump  -Al udp and host 192.168.178.49
 sudo tcpdump  -Al udp and port 5060
 
 ## cppcheck
-/Users/wkeller/Downloads/cppcheck-1.89/cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio/ -I ./lib/FSMachine/src/ -I ./lib/NetworkClient/src/ -I ./lib/Packet/src/ .
+/Users/wkeller/Downloads/cppcheck-1.89/cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio/ -I ./lib/FSMachine/src/ -I ./lib/NetworkClient/src/ -I ./lib/Packet/src/ -I ./lib/Protocol/src/.
 
-C:\Users\eedwoke\Downloads\cppcheck-1.89\cppcheck-1.89\cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio\ -I .\li\Data\src\ -I .\lib\NetworkClient\src\ -I .\lib\FSMachine\src\ -I .\lib\Parameter\src\ .
+C:\Users\eedwoke\Downloads\cppcheck-1.89\cppcheck-1.89\cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio\ -I .\lib\FSMachine\src\ -I .\lib\NetworkClient\src\ -I .\lib\Packet\src\ -I .\lib\Protocol\src\ .
 
 ## echo server (UNIX)
 ncat -v -l 5060 --keep-open --udp --exec "/bin/cat"
@@ -23,6 +23,10 @@ pio test
 pio test -e native
 pio test -e native -i common
 pio test -e native -f native
+
+## pio version
+pip uninstall platformio 
+pip install -U "platformio<4.1" --user
 
 ## debug: esp-prog
 JTAG    Board Pin	lolin    Description
