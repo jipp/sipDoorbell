@@ -14,6 +14,7 @@ sudo tcpdump  -Al udp and port 5060
 /Users/wkeller/Downloads/cppcheck-1.89/cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio/ -I ./lib/FSMachine/src/ -I ./lib/NetworkClient/src/ -I ./lib/Packet/src/ -I ./lib/Protocol/src/.
 
 C:\Users\eedwoke\Downloads\cppcheck-1.89\cppcheck-1.89\cppcheck --std=c++11 --platform=native --enable=all --inconclusive -i .pio\ -I .\lib\FSMachine\src\ -I .\lib\NetworkClient\src\ -I .\lib\Packet\src\ -I .\lib\Protocol\src\ .
+C:\Users\eedwoke\Downloads\cppcheck-1.89\cppcheck-1.89\cppcheck --std=c++11 --enable=all -i .pio\ -I .\lib\FSMachine\src\ -I .\lib\NetworkClient\src\ -I .\lib\Packet\src\ -I .\lib\Protocol\src\ .
 
 ## echo server (UNIX)
 ncat -v -l 5060 --keep-open --udp --exec "/bin/cat"
@@ -26,7 +27,7 @@ pio test -e native -f native
 
 ## pio version
 pip uninstall platformio 
-pip install -U "platformio<4.1" --user
+pip install -U "platformio<4.1"
 
 ## debug: esp-prog
 JTAG    Board Pin	lolin    Description
