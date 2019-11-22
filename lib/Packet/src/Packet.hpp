@@ -1,5 +1,5 @@
-#ifndef PACKET_HPP_
-#define PACKET_HPP_
+#ifndef PACKET_HPP
+#define PACKET_HPP
 
 #include <string>
 
@@ -12,7 +12,7 @@ struct Socket
 class Packet
 {
 public:
-    Packet(void);
+    Packet();
     ~Packet();
     Packet &operator=(const Packet &);
 

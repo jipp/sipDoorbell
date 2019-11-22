@@ -1,5 +1,5 @@
-#ifndef STATE_HPP_
-#define STATE_HPP_
+#ifndef STATE_HPP
+#define STATE_HPP
 
 #include "Event.hpp"
 #include "Protocol.hpp"

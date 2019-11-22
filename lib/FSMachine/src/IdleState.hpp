@@ -1,18 +1,18 @@
-#ifndef IDLE_STATE_HPP_
-#define IDLE_STATE_HPP_
+#ifndef IDLESTATE_HPP
+#define IDLESTATE_HPP
 
 #include "State.hpp"
 
 class IdleState : public State
 {
 public:
-  IdleState(void);
+  IdleState();
   ~IdleState();
 
-  void entryAction(Event, Protocol *) override;
-  void exitAction(Protocol *) override;
-  bool guardAction(Event, Protocol *) override;
-  void timeAction(Protocol *) override;
+  void entryAction(Event exitEvent, Protocol *protocol) override;
+  void exitAction(Protocol *protocol) override;
+  bool guardAction(Event checkEvent, Protocol *protocol) override;
+  void timeAction(Protocol *protocol) override;
 };
 
 #endif

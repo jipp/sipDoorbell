@@ -1,15 +1,6 @@
 #include "NetworkClient.hpp"
 
-NetworkClient::NetworkClient(void) : server("fritz.box")
-{
-    port = 5060;
-}
-
-NetworkClient::NetworkClient(std::string const &server)
-{
-    this->server = server;
-    port = 5060;
-}
+NetworkClient::NetworkClient() = default;
 
 NetworkClient::NetworkClient(std::string const &server, uint16_t port)
 {
@@ -17,14 +8,14 @@ NetworkClient::NetworkClient(std::string const &server, uint16_t port)
     this->port = port;
 }
 
-NetworkClient::~NetworkClient(void)
-{
-}
+NetworkClient::~NetworkClient(void) = default;
 
 bool NetworkClient::begin(Packet *packet)
 {
     if (udp.begin(port) != 1)
+    {
         return false;
+    }
 
     packet->local.address = std::string(WiFi.localIP().toString().c_str());
     packet->local.port = port;
@@ -38,9 +29,10 @@ bool NetworkClient::listen(Packet *packet)
 {
     int payloadSize = udp.parsePacket();
 
-    if (payloadSize)
+    if (payloadSize != 0)
     {
-        char *payload = (char *)malloc(payloadSize + 1);
+        //char *payload = (char *)malloc(payloadSize + 1);
+        char *payload = new char[payloadSize + 1];
 
         udp.read(payload, payloadSize);
         payload[payloadSize] = '\0';
@@ -51,7 +43,8 @@ bool NetworkClient::listen(Packet *packet)
 
         packet->payload = payload;
 
-        free(payload);
+        //free(payload);
+        delete (payload);
 
         return true;
     }
@@ -66,8 +59,5 @@ bool NetworkClient::send(Packet *packet)
 
     udp.print(packet->payload.c_str());
 
-    if (udp.endPacket() != 1)
-        return false;
-
-    return true;
+    return (udp.endPacket() == 1);
 }

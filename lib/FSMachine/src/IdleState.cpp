@@ -1,12 +1,8 @@
 #include "IdleState.hpp"
 
-IdleState::IdleState()
-{
-}
+IdleState::IdleState() = default;
 
-IdleState::~IdleState()
-{
-}
+IdleState::~IdleState() = default;
 
 void IdleState::entryAction(Event exitEvent, Protocol *protocol)
 {

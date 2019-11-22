@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Protocol::Protocol(void)
+Protocol::Protocol()
 {
     cSeq = 0;
     cSeqRegister = 0;
@@ -14,19 +14,20 @@ Protocol::Protocol(void)
     callID = "234567890abcdef1";
     local.tag = "34567890abcdef12";
 #else
-    branch = getRandomString(16);
-    callID = getRandomString(10);
-    local.tag = getRandomString(16);
+    const int branchLength = 16;
+    const int callIDLength = 10;
+    const int tagLength = 16;
+    branch = getRandomString(branchLength);
+    callID = getRandomString(callIDLength);
+    local.tag = getRandomString(tagLength);
 #endif
     remote.tag.clear();
     answer = StatusCode::not_defined;
 }
 
-Protocol::~Protocol(void)
-{
-}
+Protocol::~Protocol(void) = default;
 
-void Protocol::parse(void)
+void Protocol::parse()
 {
     tokenizePayload();
     answer = StatusCode(atoi(getToken("SIP/2.0", 1).c_str()));
@@ -42,7 +43,7 @@ void Protocol::parse(void)
     flow = getToken("CSeq:", 2);
 }
 
-void Protocol::tokenizePayload(void)
+void Protocol::tokenizePayload()
 {
     std::istringstream payload(packet.payload);
     std::string buffer;
@@ -50,45 +51,60 @@ void Protocol::tokenizePayload(void)
     lines.clear();
 
     while (std::getline(payload, buffer))
+    {
         lines.push_back(buffer);
+    }
 }
 
-std::string Protocol::getToken(std::string linePattern, int n)
+std::string Protocol::getToken(std::string const &linePattern, int n)
 {
-    int i = 0;
+    unsigned int i = 0;
     std::vector<std::string> token;
     std::istringstream line;
     std::string buffer;
 
-    if (lines.size() == 0)
-        return "";
+    if (lines.empty())
+    {
+        return {};
+    }
 
     for (i = 0; i < lines.size(); i++)
+    {
         if (lines[i].find(linePattern) != std::string::npos)
+        {
             break;
+        }
+    }
 
     if (lines[i].find(linePattern) == std::string::npos)
-        return "";
+    {
+        return {};
+    }
 
     line = std::istringstream(lines[i]);
 
     while (std::getline(line, buffer, ' '))
+    {
         token.push_back(buffer);
+    }
 
     if (n > token.size())
-        return "";
+    {
+        return {};
+    }
 
     return token[n];
 }
 
-std::string Protocol::getValue(std::string linePattern, std::string pattern, std::string delimiter)
+std::string Protocol::getValue(std::string const &linePattern, std::string const &pattern, std::string const &delimiter)
 {
-    int i = 0;
-    int start = 0;
-    int end = 0;
+    unsigned int i = 0;
+    unsigned int start = 0;
+    unsigned int end = 0;
     std::string buffer;
 
     for (i = 0; i < lines.size(); i++)
+    {
         if (lines[i].find(linePattern) != std::string::npos)
         {
             if (lines[i].find(pattern) != std::string::npos)
@@ -98,11 +114,16 @@ std::string Protocol::getValue(std::string linePattern, std::string pattern, std
                 break;
             }
             else
-                return "";
+            {
+                return {};
+            }
         }
+    }
 
     if (i >= lines.size())
-        return "";
+    {
+        return {};
+    }
 
     buffer = lines[i].substr(start, end - start);
 
@@ -112,8 +133,9 @@ std::string Protocol::getValue(std::string linePattern, std::string pattern, std
 std::string Protocol::calcHash(const std::string &buffer)
 {
 #ifdef ESP32
-    MD5Builder md5Builder;
-    char digest[33];
+    MD5Builder md5Builder = MD5Builder();
+    const int digestLength = 33;
+    char digest[digestLength];
 
     md5Builder.begin();
     md5Builder.add(buffer.c_str());
@@ -128,11 +150,13 @@ std::string Protocol::calcHash(const std::string &buffer)
 
 std::string Protocol::getRandomString(int n)
 {
-    char alphabet[] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"};
+    std::string alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    std::string res;
 
-    std::string res = "";
     for (int i = 0; i < n; i++)
-        res = res + alphabet[std::rand() * (sizeof(alphabet) - 1ull) / RAND_MAX];
+    {
+        res += alphabet.at(std::rand() * alphabet.size() / RAND_MAX);
+    }
 
     return res;
 }

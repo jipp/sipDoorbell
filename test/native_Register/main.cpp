@@ -15,6 +15,7 @@ TEST(Register, without_authentication)
     Protocol protocol = Protocol();
     RegisterState register_without_authentication = RegisterState();
 
+    protocol.username = "username";
     protocol.packet.local.address = "esp32";
     protocol.packet.local.port = 5060;
     protocol.packet.remote.address = "fritz.box";

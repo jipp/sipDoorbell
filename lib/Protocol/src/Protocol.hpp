@@ -1,17 +1,16 @@
-#ifndef PROTOCOL_HPP_
-#define PROTOCOL_HPP_
+#ifndef PROTOCOL_HPP
+#define PROTOCOL_HPP
 
 #include <cstdlib>
-#include <string>
 #include <sstream>
+#include <string>
 #include <vector>
-
-#include "Packet.hpp"
-#include "StatusCode.hpp"
 
 #ifdef ESP32
 #include "MD5Builder.h"
 #endif
+#include "Packet.hpp"
+#include "StatusCode.hpp"
 
 struct values
 {
@@ -22,7 +21,7 @@ struct values
 class Protocol
 {
 public:
-    Protocol(void);
+    Protocol();
     ~Protocol();
 
     Packet packet;
@@ -33,11 +32,11 @@ public:
     uint16_t cSeqRegister;
     uint16_t cSeqInvite;
     uint16_t cSeqAck;
-    values remote = {"", ""};
-    values local = {"", ""};
-    std::string username = "username";
-    std::string password = "password";
-    std::string phonenumber = "**621";
+    values remote;
+    values local;
+    std::string username;
+    std::string password;
+    std::string phonenumber;
     std::string branch; // unique across space and time for all requests sent by a user agent
     StatusCode answer;
     std::string callID; // unique
@@ -45,15 +44,15 @@ public:
     std::string realm;
     std::string nonce;
 
-    void parse(void);
+    void parse();
     std::string calcHash(const std::string &);
 
 private:
     std::vector<std::string> lines;
 
-    void tokenizePayload(void);
-    std::string getToken(std::string, int);
-    std::string getValue(std::string, std::string, std::string);
+    void tokenizePayload();
+    std::string getToken(std::string const &, int);
+    std::string getValue(std::string const &, std::string const &, std::string const &);
     std::string getRandomString(int);
 };
 

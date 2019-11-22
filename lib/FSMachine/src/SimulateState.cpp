@@ -1,12 +1,8 @@
 #include "SimulateState.hpp"
 
-SimulateState::SimulateState()
-{
-}
+SimulateState::SimulateState() = default;
 
-SimulateState::~SimulateState()
-{
-}
+SimulateState::~SimulateState() = default;
 
 void SimulateState::entryAction(Event exitEvent, Protocol *protocol)
 {

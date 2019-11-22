@@ -1,18 +1,18 @@
-#ifndef SIMULATE_STATE_HPP_
-#define SIMULATE_STATE_HPP_
+#ifndef SIMULATESTATE_HPP
+#define SIMULATESTATE_HPP
 
 #include "State.hpp"
 
 class SimulateState : public State
 {
 public:
-  SimulateState(void);
+  SimulateState();
   ~SimulateState();
 
-  void entryAction(Event, Protocol *) override;
-  void exitAction(Protocol *) override;
-  bool guardAction(Event, Protocol *) override;
-  void timeAction(Protocol *) override;
+  void entryAction(Event exitEvent, Protocol *protocol) override;
+  void exitAction(Protocol *protocol) override;
+  bool guardAction(Event checkEvent, Protocol *protocol) override;
+  void timeAction(Protocol *protocol) override;
 };
 
 #endif

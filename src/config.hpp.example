@@ -6,6 +6,7 @@
 
 const char *hostname = "hostname";
 const char *server = "fritz.box";
+const uint16_t port = 5060;
 const char *username = "username";
 const char *password = "password";
 

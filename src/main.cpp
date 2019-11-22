@@ -2,15 +2,14 @@
 
 #include <iostream>
 
-#include "WiFiManager.h"
-#include "Ticker.h"
-#include "OneButton.h"
 #include "ACS712.h"
-
-#include "Packet.hpp"
-#include "NetworkClient.hpp"
 #include "Event.hpp"
 #include "FSMachine.hpp"
+#include "NetworkClient.hpp"
+#include "OneButton.h"
+#include "Packet.hpp"
+#include "Ticker.h"
+#include "WiFiManager.h"
 
 #include "config.hpp"
 
@@ -20,7 +19,7 @@ Ticker memory;
 ACS712 sensor(ACS712_05B, SENSOR);
 
 Packet packet;
-NetworkClient networkClient = NetworkClient(server);
+NetworkClient networkClient = NetworkClient(server, port);
 Event event = Event::IDLE;
 Protocol protocol = Protocol();
 FSMachine fsMachine = FSMachine(username, password);

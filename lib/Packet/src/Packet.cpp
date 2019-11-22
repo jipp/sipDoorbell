@@ -1,8 +1,6 @@
 #include "Packet.hpp"
 
-Packet::Packet(void)
-{
-}
+Packet::Packet(void) = default;
 
 Packet &Packet::operator=(const Packet &Packet)
 {
@@ -15,6 +13,4 @@ Packet &Packet::operator=(const Packet &Packet)
     return *this;
 }
 
-Packet::~Packet()
-{
-}
+Packet::~Packet() = default;

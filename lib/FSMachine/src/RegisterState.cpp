@@ -1,17 +1,16 @@
 #include "RegisterState.hpp"
 
-RegisterState::RegisterState()
-{
-}
+RegisterState::RegisterState() = default;
 
-RegisterState::~RegisterState()
-{
-}
+RegisterState::~RegisterState() = default;
 
 void RegisterState::entryAction(Event exitEvent, Protocol *protocol)
 {
     if (exitEvent == Event::SEND)
+    {
         protocol->cSeqRegister++;
+    }
+
     generate(protocol);
 }
 
@@ -30,7 +29,7 @@ bool RegisterState::guardAction(Event checkEvent, Protocol *protocol)
         return false;
     default:
         return false;
-    };
+    }
 }
 
 void RegisterState::timeAction(Protocol *protocol)
@@ -41,7 +40,9 @@ void RegisterState::timeAction(Protocol *protocol)
 void RegisterState::generate(Protocol *protocol)
 {
     std::stringstream buffer;
-    std::string digest1, digest2, digest3;
+    std::string digest1;
+    std::string digest2;
+    std::string digest3;
 
     buffer << "REGISTER"
            << " sip:"
@@ -88,17 +89,17 @@ void RegisterState::generate(Protocol *protocol)
         digest1 = protocol->calcHash(protocol->username + ":" + protocol->realm + ":" + protocol->password);
         digest2 = protocol->calcHash("REGISTER:sip:" + protocol->packet.remote.address);
         digest3 = protocol->calcHash(digest1 + ":" + protocol->nonce + ":" + digest2);
-        buffer << "Authorization: Digest username=\""
+        buffer << R"(Authorization: Digest username=")"
                << protocol->username
-               << "\", realm=\""
+               << R"(", realm=")"
                << protocol->realm
-               << "\", nonce=\""
+               << R"(", nonce=")"
                << protocol->nonce
-               << "\", opaque=\"\", uri=\"sip:"
+               << R"(", opaque="", uri="sip:)"
                << protocol->packet.remote.address
-               << "\", response=\""
+               << R"(", response=")"
                << digest3
-               << "\"\r\n";
+               << R"("\r\n")";
     }
     buffer << "Content-Length: 0\r\n\r\n";
 

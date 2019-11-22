@@ -1,5 +1,5 @@
-#ifndef STATUS_CODE_HPP_
-#define STATUS_CODE_HPP_
+#ifndef STATUSCODE_HPP
+#define STATUSCODE_HPP
 
 enum class StatusCode
 {

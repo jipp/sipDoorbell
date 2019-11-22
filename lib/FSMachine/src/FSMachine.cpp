@@ -12,9 +12,7 @@ FSMachine::FSMachine(std::string const &username, std::string const &password) :
     protocol.password = password;
 }
 
-FSMachine::~FSMachine()
-{
-}
+FSMachine::~FSMachine() = default;
 
 Event FSMachine::loop(Event checkEvent, Packet *packet)
 {
@@ -23,39 +21,41 @@ Event FSMachine::loop(Event checkEvent, Packet *packet)
     protocol.packet = *packet;
 
     if (checkEvent == Event::RECEIVED)
-        protocol.parse();
-
-    for (int i = 0; i < sizeof(fsMatrix) / sizeof(FSMatrix); i++)
     {
-        if (currentState == fsMatrix[i].currentState)
+        protocol.parse();
+    }
+
+    for (FSMatrix &element : fsMatrix)
+    {
+        if (currentState == element.currentState)
         {
-            if (checkEvent == fsMatrix[i].checkEvent)
+            if (checkEvent == element.checkEvent)
             {
-                if (fsMatrix[i].nextState->guardAction(checkEvent, &protocol))
+                if (!element.nextState->guardAction(checkEvent, &protocol))
+                {
+                    currentState->exitAction(&protocol);
+                    currentState = &idle;
+                    currentState->entryAction(element.exitEvent, &protocol);
+                }
+                else
                 {
                     timeoutTimerStart = now;
                     resendTimerStart = now;
                     currentState->exitAction(&protocol);
-                    currentState = fsMatrix[i].nextState;
-                    currentState->entryAction(fsMatrix[i].exitEvent, &protocol);
+                    currentState = element.nextState;
+                    currentState->entryAction(element.exitEvent, &protocol);
 
                     *packet = protocol.packet;
 
-                    return fsMatrix[i].exitEvent;
-                }
-                else
-                {
-                    currentState->exitAction(&protocol);
-                    currentState = &idle;
-                    currentState->entryAction(fsMatrix[i].exitEvent, &protocol);
+                    return element.exitEvent;
                 }
             }
         }
     }
 
-    for (int i = 0; i < sizeof(fsMatrixTimer) / sizeof(FSMatrixTimer); i++)
+    for (FSMatrixTimer &element : fsMatrixTimer)
     {
-        if (currentState == fsMatrixTimer[i].currentState)
+        if (currentState == element.currentState)
         {
             if (timeoutTimer + timeoutTimerStart < now)
             {

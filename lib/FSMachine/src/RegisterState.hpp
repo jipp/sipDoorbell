@@ -1,18 +1,18 @@
-#ifndef REGISTER_STATE_HPP_
-#define REGISTER_STATE_HPP_
+#ifndef REGISTERSTATE_HPP
+#define REGISTERSTATE_HPP
 
 #include "State.hpp"
 
 class RegisterState : public State
 {
 public:
-  RegisterState(void);
+  RegisterState();
   ~RegisterState();
 
-  void entryAction(Event, Protocol *) override;
-  void exitAction(Protocol *) override;
-  bool guardAction(Event, Protocol *) override;
-  void timeAction(Protocol *) override;
+  void entryAction(Event exitEvent, Protocol *protocol) override;
+  void exitAction(Protocol *protocol) override;
+  bool guardAction(Event checkEvent, Protocol *protocol) override;
+  void timeAction(Protocol *protocol) override;
 
 private:
   void generate(Protocol *);

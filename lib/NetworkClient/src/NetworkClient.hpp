@@ -1,17 +1,16 @@
-#ifndef NETWORK_CLIENT_HPP_
-#define NETWORK_CLIENT_HPP_
+#ifndef NETWORKCLIENT_HPP
+#define NETWORKCLIENT_HPP
 
 #include <string>
 
-#include <WiFi.h>
-#include <WiFiUdp.h>
 #include "Packet.hpp"
+#include "WiFi.h"
+#include "WiFiUdp.h"
 
 class NetworkClient
 {
 public:
-  NetworkClient(void);
-  explicit NetworkClient(std::string const &);
+  NetworkClient();
   NetworkClient(std::string const &, uint16_t);
   ~NetworkClient();
 

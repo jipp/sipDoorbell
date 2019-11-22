@@ -1,5 +1,5 @@
-#ifndef EVENT_HPP_
-#define EVENT_HPP_
+#ifndef EVENT_HPP
+#define EVENT_HPP
 
 enum class Event
 {

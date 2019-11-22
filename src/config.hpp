@@ -6,6 +6,7 @@
 
 const char *hostname = "sipDoorbell";
 const char *server = "fritz.box";
+const uint16_t port = 5060;
 const char *username = "doorbell";
 const char *password = "Drei3Zehn";
 
