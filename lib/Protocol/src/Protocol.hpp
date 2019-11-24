@@ -2,6 +2,7 @@
 #define PROTOCOL_HPP
 
 #include <cstdlib>
+#include <random>
 #include <sstream>
 #include <string>
 #include <vector>

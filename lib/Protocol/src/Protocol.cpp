@@ -29,8 +29,10 @@ Protocol::~Protocol(void) = default;
 
 void Protocol::parse()
 {
+    char *end;
+    const int base = 10;
     tokenizePayload();
-    answer = StatusCode(atoi(getToken("SIP/2.0", 1).c_str()));
+    answer = StatusCode(strtol(getToken("SIP/2.0", 1).c_str(), &end, base));
     branch = getValue("Via:", "branch=", ";");
     remote.tag = getValue("To:", "tag=", "\r\n");
     remote.addr = getValue("To:", " ", ";");
@@ -39,7 +41,7 @@ void Protocol::parse()
     realm = getValue("WWW-Authenticate:", "realm=\"", "\"");
     nonce = getValue("WWW-Authenticate:", "nonce=\"", "\"");
     callID = getValue("Call-ID:", " ", "@");
-    cSeq = atoi(getToken("CSeq:", 1).c_str());
+    cSeq = strtol(getToken("CSeq:", 1).c_str(), &end, base);
     flow = getToken("CSeq:", 2);
 }
 
@@ -151,11 +153,14 @@ std::string Protocol::calcHash(const std::string &buffer)
 std::string Protocol::getRandomString(int n)
 {
     std::string alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    std::random_device random_device;
+    std::mt19937 random_engine(random_device());
+    std::uniform_int_distribution<int> distribution(0, alphabet.size() - 1);
     std::string res;
 
     for (int i = 0; i < n; i++)
     {
-        res += alphabet.at(std::rand() * alphabet.size() / RAND_MAX);
+        res += alphabet.at(distribution(random_engine));
     }
 
     return res;

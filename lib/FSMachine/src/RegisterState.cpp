@@ -99,7 +99,7 @@ void RegisterState::generate(Protocol *protocol)
                << protocol->packet.remote.address
                << R"(", response=")"
                << digest3
-               << R"("\r\n")";
+               << "\"\r\n";
     }
     buffer << "Content-Length: 0\r\n\r\n";
 
