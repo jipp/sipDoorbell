@@ -1,5 +1,13 @@
 #include <unity.h>
 
+void setUp(void)
+{
+}
+
+void tearDown(void)
+{
+}
+
 void dummy(void)
 {
     // TEST_IGNORE();

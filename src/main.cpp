@@ -2,21 +2,28 @@
 
 #include <iostream>
 
-#include "ACS712.h"
+#include <ACS712.h>
+#include <AsyncUDP.h>
+#include <OneButton.h>
+#include <Ticker.h>
+#include <WiFiManager.h>
+
 #include "Event.hpp"
 #include "FSMachine.hpp"
 #include "NetworkClient.hpp"
-#include "OneButton.h"
 #include "Packet.hpp"
-#include "Ticker.h"
-#include "WiFiManager.h"
 
 #include "config.hpp"
+
+#ifndef SPEED
+#define SPEED 115200
+#endif
 
 OneButton button(PUSH_BUTTON, true);
 Ticker blinker;
 Ticker memory;
 ACS712 sensor(ACS712_05B, SENSOR);
+AsyncUDP sipClient;
 
 Packet packet;
 NetworkClient networkClient = NetworkClient(server, port);
@@ -85,12 +92,19 @@ void setupWiFi()
     reset();
   }
 
-  networkClient.begin(&packet);
+  // networkClient.begin(&packet);
+}
+
+void receive(AsyncUDPPacket packet) // receive
+{
+  // std::cout << "received:" << std::endl
+  //           << packet.payload << std::endl;
+  event = Event::RECEIVED;
 }
 
 void setup()
 {
-  Serial.begin(460800);
+  Serial.begin(SPEED);
 
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(PUSH_BUTTON, INPUT_PULLUP);
@@ -114,6 +128,8 @@ void setup()
 
   setupWiFi();
 
+  sipClient.onPacket(receive);
+
   blinker.attach(blink_ok, blink);
 }
 
@@ -127,13 +143,14 @@ void loop()
   {
     std::cout << "send:" << std::endl
               << packet.payload << std::endl;
-    networkClient.send(&packet);
+    sipClient.connect(IPAddress(192, 168, 178, 1), port);
+    // networkClient.send(&packet);
   }
 
-  if (networkClient.listen(&packet))
-  {
-    std::cout << "received:" << std::endl
-              << packet.payload << std::endl;
-    event = Event::RECEIVED;
-  }
+  // if (networkClient.listen(&packet))
+  // {
+  //   std::cout << "received:" << std::endl
+  //             << packet.payload << std::endl;
+  //   event = Event::RECEIVED;
+  // }
 }
